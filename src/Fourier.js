@@ -107,7 +107,7 @@ function creaTren () {
     },
     integral: 1,
     width: "3px",
-    originalCode:"$$f(t) = \\begin{cases} -1 &\\text{si } t\\in\\left[k\\pi,(k+1)\\pi\\right)\\quad\\text{para algún }k\\in\\mathbb{Z}\\text{ impar}\\\\     +1  & \\text{si } t\\in\\left[k\\pi,(k+1)\\pi\\right)\\quad\\text{para algún }k\\in\\mathbb{Z}\\text{ par}.  \\end{cases}$$"
+    originalCode:"$$f(t) = \\begin{cases} -1 &\\text{si } t\\in\\left[k\\pi,(k+1)\\pi\\right)\\quad\\text{para }k\\in\\mathbb{Z}\\text{ impar}\\\\     +1  & \\text{si } t\\in\\left[k\\pi,(k+1)\\pi\\right)\\quad\\text{para }k\\in\\mathbb{Z}\\text{ par}.  \\end{cases}$$"
   };
 
   funcionOriginal = SD.elementMaker(specFuncionOriginal);
@@ -166,7 +166,7 @@ function creaTren () {
       return amplitud*c;
     },
     range: sceneRange,
-    color: 'white',
+    color: '#74dde0',
     sumaParcial: function () {
       return sumaParcialCuadrado (this.a, this.b, this.ordenAproximacion);
     },

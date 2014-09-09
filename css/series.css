@@ -1,22 +1,33 @@
+body {
+    background-color: #253439;
+    color: #fefefe;
+    font-family: 'Oswald', sans-serif;
+}
+
 .titleSpace {
-    background-color: #f9f9f9;
-    color: #111111;
 }
 .titleSpace h1 {
+    color: #74dde0;
     text-align: center;
 }
 
 .graphSpace {
-    background-color: #002020;
+    background-color: #f1f1f1;
+    color: #111111;
 }
 
 .controlSpace {
     background-color: #f1f1f1;
     color: #111111;
+
 }
 
+.bottomSpace {
+    background-color: #101010;
+    color: #f1f1f1;
+    
+}
 #divFormulaDefinicion {
-    background-color: #f1f1f1;
 }
 
 .row{
@@ -29,5 +40,5 @@
 }
 
 .funcionOriginal {
-    stroke: #ff0000;
+    stroke: #2f67bf;
 }
