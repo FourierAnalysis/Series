@@ -111,13 +111,17 @@ function creaTren () {
   };
 
   funcionOriginal = SD.elementMaker(specFuncionOriginal);
-
+  funcionOriginal.htmlClasses.push("funcionOriginal");
+  
   for(var i=-3; i<3; i++) {
-    funcionOriginal.add(SD.lineMaker({x1:i*Math.PI, x2:(i+1)*Math.PI,
-				      y1: amplitud*Math.pow(-1, i), y2: amplitud*Math.pow(-1, i) }));
-    if(i!=2)
-      funcionOriginal.add(SD.lineMaker({x1:(i+1)*Math.PI, x2:(i+1)*Math.PI,
-					y1: -amplitud , y2: amplitud }));
+    var linea = SD.lineMaker({x1:i*Math.PI, x2:(i+1)*Math.PI, y1: amplitud*Math.pow(-1, i), y2: amplitud*Math.pow(-1, i) });
+   linea.htmlClasses.push("funcionOriginal");
+    funcionOriginal.add(linea);
+    if(i!=2) {
+      linea = SD.lineMaker({x1:(i+1)*Math.PI, x2:(i+1)*Math.PI, y1: -amplitud , y2: amplitud });
+      linea.htmlClasses.push("funcionOriginal");
+      funcionOriginal.add(linea);
+    }
   }
 
 
@@ -162,7 +166,7 @@ function creaTren () {
       return amplitud*c;
     },
     range: sceneRange,
-    color: 'blue',
+    color: 'white',
     sumaParcial: function () {
       return sumaParcialCuadrado (this.a, this.b, this.ordenAproximacion);
     },
