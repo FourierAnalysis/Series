@@ -1,10 +1,11 @@
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Bootstrap -->
     <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    
+    <link href="css/series.css" rel="stylesheet">
+
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'] ]}});
     </script>
@@ -13,103 +14,102 @@
     </script>
     <!-- <link rel="stylesheet" type="text/css" href="css/calculo-mecanico.css" media="screen" /> -->
     <title></title>
-  </head>
-  <body>
-    
-    <div class="container-fluid">
-      <h1>Aproximación por series de Fourier</h1>
-      <div class="row">
-	      <div class="col-md-6 col-sm-12 bg-success">
-	        <div id='divEscena'> </div>
-	      </div>
-	      <div class="col-md-6 col-sm-12 bg-warning">
-
-	        <form role="form">
-	          <div class="row">
-	            <h3 text-indent="20em">Función</h3>
+</head>
+<body>
+  <div class="container-fluid titleSpace">
+    <h1>Aproximación por series de Fourier</h1>
+    <div class="row">
+	    <div class="col-md-6 col-sm-12">
+        <h4>Función</h4>
+	      <form role="form">
+	        <div class="row">
+	          <div class="col-sm-4">
+		          <div class="radio">
+		            <label>
+		              <input type="radio" name="funcionElegida" onclick="aproxima('Tren');" checked>
+		              Tren de pulsos rectangulares
+		            </label>
+		          </div>
 	          </div>
-	          <div class="row">
-	      <div class="col-sm-4">
-		<div class="radio">
-		  <label>
-		    <input type="radio" name="funcionElegida" onclick="aproxima('Tren');" checked>
-		    Tren de pulsos rectangulares
-		  </label>
-		</div>
-	      </div>
-	      <div class="col-sm-4">
-		<div class="radio">
-		  <label>
-		    <input type="radio" name="funcionElegida" onclick="aproxima('Sierra');">
-		    Dientes de sierra
-		  </label>
-		</div>
-	      </div>	      
-	      <div class="col-sm-4">
-		<div class="radio">
-		  <label>
-		    <input type="radio"  name="funcionElegida" onclick="aproxima('Exponencial');">
-		    Exponencial
-		  </label>
-		</div>
-	      </div>
-            </div>
-	    <div class="row">
-	      <h4>Definición</h4>
-	    </div>
-	    <div class="row">
-	      <div id="divFormulaDefinicion"></div>
-	    </div>
-	  </form>
-
-	  <form role="form">
-	    <div class="row">
-	      <h4>Orden de la aproximación</h4>
-	    </div>
-	    <div class="row">
-	      <div class="col-sm-4">
-		<strong>Número de términos:</strong> <span id="divNumeroTerminos"></span>
-	      </div>
-	      <div class="col-sm-4">
-		<button type="button" class="btn btn-default btn-block" onClick="aumenta();";>+</button>
-	      </div>	      
-	      <div class="col-sm-4">
-		<button type="button" class="btn btn-default btn-block" onClick="disminuye();">-</button>
-	      </div>
-            </div>
-	  </form>
-
-	  <div class="row">
-	    <h4>Aproximación</h4>
-	  </div>
-	  <div class="row">
-	    <div class="panel panel-default" style="overflow-y: scroll; height:110px;">
-	      <div class="panel-body">
-		<div id="divFormula"> </div>
-	      </div>
-	    </div>
+	          <div class="col-sm-4">
+		          <div class="radio">
+		            <label>
+		              <input type="radio" name="funcionElegida" onclick="aproxima('Sierra');">
+		              Dientes de sierra
+		            </label>
+		          </div>
+	          </div>	      
+	          <div class="col-sm-4">
+		          <div class="radio">
+		            <label>
+		              <input type="radio"  name="funcionElegida" onclick="aproxima('Exponencial');">
+		              Exponencial
+		            </label>
+		          </div>
+	          </div>
           </div>
-
-	  <div class="row">
-	    <h4>Error cuadrático medio</h4>
-	  </div>
-	  <div class="row">
-	    <div id="divErrorMedio"></div>
+        </form>
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <h4>Orden de la aproximación</h4>
+        <form role="form">
+	        <div class="row">
+	          <div class="col-sm-4">
+		          <strong>Número de términos:</strong> <span id="divNumeroTerminos"></span>
+	          </div>
+	          <div class="col-sm-4">
+		          <button type="button" class="btn btn-default btn-block" onClick="aumenta();">+</button>
+	          </div>	      
+	          <div class="col-sm-4">
+		          <button type="button" class="btn btn-default btn-block" onClick="disminuye();">-</button>
+	          </div>
           </div>
-
-	</div>
+	      </form>
       </div>
     </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+	    <div class="col-md-6 col-sm-12 graphSpace">
+	      <div id='divEscena'> </div>
+	    </div>
+	    <div class="col-md-6 col-sm-12 controlSpace">
+	      <h4>Definición</h4>
+	      <div class="row">
+	        <div id="divFormulaDefinicion"></div>
+	      </div>
+        <h4>Aproximación</h4>
+	      <div class="row">
+	        <div style="overflow-y: scroll; height:110px;">
+		        <div id="divFormula"> </div>
+	        </div>
+        </div>
+        <h4>Error cuadrático medio</h4>
+	      <div class="row">
+	        <div id="divErrorMedio"></div>
+        </div>
+	    </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-sm-12 controlSpace">
+        Test
+      </div>
+      <div class="col-md-6 col-sm-12 graphSpace">
+        Test
+      </div>
+    </div>
+    
+  </div>
+  
 
 
+  <script src="lib/sceneDraw/sceneDraw.js"></script>
+  <script src="src/Fourier.js"></script>
 
-    <script src="lib/sceneDraw/sceneDraw.js"></script>
-    <script src="src/Fourier.js"></script>
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="lib/bootstrap/js/bootstrap.min.js"></script>
-</div>
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="lib/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
