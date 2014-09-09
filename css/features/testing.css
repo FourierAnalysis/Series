@@ -1,0 +1,19 @@
+div.plot { 
+		border: 1px solid black; 
+		float: left;
+}
+
+.clear-float {
+		clear: both;
+}    
+
+div > svg { 
+		max-height:100%;
+		max-width:100%;
+}
+
+.functionGraph {
+		stroke:red;
+		stroke-width:1px;
+		fill:none
+}
