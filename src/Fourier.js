@@ -2,13 +2,16 @@ var SH_PI = 1/2 * (Math.exp(Math.PI) - Math.exp(-Math.PI));
 var CH_PI = 1/2 * (Math.exp(Math.PI) + Math.exp(-Math.PI));
 var TOPE_SUPERIOR =30;
 var TOPE_INFERIOR = 0;
-var OFFSETY2 = -8;
+var OFFSETY2 = 0;
 
-var div = document.getElementById('divEscena');
+var divEscena = document.getElementById('divEscena');
+var divEscenaError = document.getElementById('divEscenaError');
 var scene;
+var sceneError;
 var sceneRange;
+var sceneErrorRange;
 
-var ejeY, ejeX1, ejeX2;
+var ejeY1, ejeY2, ejeX1, ejeX2;
 var ejes;
 
 var funcionOriginal;
@@ -23,8 +26,11 @@ var integral; // I = 1/2pi int_-pi^pi f^2, para el error.
 var sumaParcial;
 var ordenAproximacion;
 
-sceneRange = SD.rangeMaker({xMin: -3*Math.PI+0.1, xMax: 3*Math.PI-0.1, yMin: -9, yMax: 5.5});
-scene = SD.sceneMaker({div: div, range: sceneRange});
+sceneRange = SD.rangeMaker({xMin: -3*Math.PI+0.1, xMax: 3*Math.PI-0.1, yMin: -5.5, yMax: 5.5});
+sceneErrorRange = SD.rangeMaker({xMin: -3*Math.PI+0.1, xMax: 3*Math.PI-0.1, yMin: -1, yMax: 4});
+
+scene = SD.sceneMaker({div: divEscena, range: sceneRange});
+sceneError = SD.sceneMaker({div: divEscenaError, range:sceneErrorRange});
 
 
 
@@ -42,6 +48,7 @@ var aumenta = function () {
 
   actualizaTexto();
   scene.plotSVG();
+  sceneError.plotSVG();
 }
 
 
@@ -50,6 +57,7 @@ var disminuye = function () {
 
   actualizaTexto();
   scene.plotSVG();
+  sceneError.plotSVG();
 }
 
 function aproxima(nombre) {
@@ -71,18 +79,22 @@ function aproxima(nombre) {
 
 
 function creaEjes () {
-  ejes   = SD.elementMaker();
-  ejeX1  = SD.lineMaker({x1: sceneRange.xMin, x2: sceneRange.xMax, y1: 0 , y2: 0})
-  ejeX2  = SD.lineMaker({x1: sceneRange.xMin, x2: sceneRange.xMax, y1: OFFSETY2 , y2: OFFSETY2 });
-  ejeY   = SD.lineMaker({y1: sceneRange.yMin, y2: sceneRange.yMax, x1: 0, x2: 0});
+  ejes1 = SD.elementMaker();
+  ejes2 = SD.elementMaker();
+  ejeX1 = SD.lineMaker({x1: sceneRange.xMin, x2: sceneRange.xMax, y1: 0 , y2: 0})
+  ejeX2 = SD.lineMaker({x1: sceneErrorRange.xMin, x2: sceneErrorRange.xMax, y1: OFFSETY2 , y2: OFFSETY2 });
+  ejeY1 = SD.lineMaker({y1: sceneRange.yMin, y2: sceneRange.yMax, x1: 0, x2: 0});
+  ejeY2 = SD.lineMaker({y1: sceneErrorRange.yMin, y2: sceneErrorRange.yMax, x1: 0, x2: 0});
 
   ejeX1.svgAttributes["stroke-dasharray"] = "5,5";
   ejeX2.svgAttributes["stroke-dasharray"] = "5,5";
-  ejeY.svgAttributes ["stroke-dasharray"] = "5,5";
+  ejeY1.svgAttributes ["stroke-dasharray"] = "5,5";
+  ejeY2.svgAttributes ["stroke-dasharray"] = "5,5";
 
-  ejes.add(ejeX1);
-  ejes.add(ejeX2);
-  ejes.add(ejeY);
+  ejes1.add(ejeX1);
+  ejes1.add(ejeY1);
+  ejes2.add(ejeX2);
+  ejes2.add(ejeY2);
 }
 
 function creaTren () {
@@ -345,18 +357,20 @@ function creaError () {
 
 
 function dibuja () {
-  scene.add(ejes);  
+  scene.add(ejes1);  
+  sceneError.add(ejes2);
   scene.add(funcionOriginal);
   scene.add(funcionAproximacion);
-  scene.add(funcionError);
+  sceneError.add(funcionError);
 
   scene.plotSVG();
+  sceneError.plotSVG();
 }
 
 function borra () {
   scene.removeChild(funcionOriginal);
   scene.removeChild(funcionAproximacion);
-  scene.removeChild(funcionError);
+  sceneError.removeChild(funcionError);
 }
 
 function sumaParcialCuadrado (a, b, N) {
