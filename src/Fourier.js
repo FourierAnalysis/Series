@@ -21,7 +21,7 @@ var specFuncionAproximacion;
 var funcionError;
 var specFuncionError;
 
-var amplitud;
+var amplitud=3;
 var integral; // I = 1/2pi int_-pi^pi f^2, para el error.
 var sumaParcial;
 var ordenAproximacion;
@@ -36,7 +36,7 @@ sceneError = SD.sceneMaker({div: divEscenaError, range:sceneErrorRange});
 
 // DIBUJO INICIAL
 creaEjes();
-creaTren();
+creaSierra();
 creaError();
 dibuja();
 actualizaTexto();
@@ -99,7 +99,7 @@ function creaEjes () {
 
 function creaTren () {
 
-  amplitud = 3;
+
   // Original
   specFuncionOriginal = {
     f: function (x) {
@@ -166,7 +166,7 @@ function creaTren () {
       return amplitud*c;
     },
     range: sceneRange,
-    color: '#74dde0',
+    color: '#1e88ab',
     sumaParcial: function () {
       return sumaParcialCuadrado (this.a, this.b, this.ordenAproximacion);
     },
@@ -189,15 +189,20 @@ function creaSierra () {
       return amplitud * this.g(x) / Math.PI;
     },
     integral: Math.PI*Math.PI/3,
-    width: "3px",
     originalCode:"$$f(t) = \\begin{cases} t &\\text{si } t\\in\\left[-\\pi,\\pi\\right)\\\\     f(t+2\\pi)=f(t)  & \\text{en otro caso.}  \\end{cases}$$"
   }
   funcionOriginal = SD.elementMaker(specFuncionOriginal);
 
   for(var i=0; i<3; i++) {
-    funcionOriginal.add(SD.lineMaker({x1:(2*i-3)*Math.PI, x2:(2*i-1)*Math.PI, y1: -amplitud, y2:amplitud}));
-    if(i!=2)
-      funcionOriginal.add(SD.lineMaker({x1:(2*i-1)*Math.PI, x2:(2*i-1)*Math.PI, y1: -amplitud, y2: amplitud}));
+    var linea = SD.lineMaker({x1:(2*i-3)*Math.PI, x2:(2*i-1)*Math.PI, y1: -amplitud, y2:amplitud});
+    linea.htmlClasses.push("funcionOriginal");
+    
+    funcionOriginal.add(linea);
+    if(i!=2) {
+      linea = SD.lineMaker({x1:(2*i-1)*Math.PI, x2:(2*i-1)*Math.PI, y1: -amplitud, y2: amplitud});
+      linea.htmlClasses.push("funcionOriginal");
+      funcionOriginal.add(linea);
+    }
   };
 
   // Aproximacion
@@ -245,7 +250,7 @@ function creaSierra () {
       return amplitud/ Math.PI * a;
     },
     range: sceneRange,
-    color: "blue",
+    color: "#1e88ab",
     sumaParcial: function () {
       return sumaParcialCuadrado (this.a, this.b, this.ordenAproximacion);
     },
@@ -269,7 +274,8 @@ function creaExponencial () {
     },
     range: sceneRange,
     integral: SH_PI * (Math.PI * CH_PI - SH_PI) / (Math.PI * Math.PI),
-    width: "3px",
+    width: "2px",
+    color: '#101010',
     originalCode:"$$f(t) = \\begin{cases} e^t - \\frac{\\sinh \\pi}{\\pi} &\\text{si } t\\in\\left[-\\pi,\\pi\\right)\\\\     f(t+2\\pi)=f(t)  & \\text{en otro caso.}  \\end{cases}$$"
   }
 
@@ -334,7 +340,7 @@ function creaExponencial () {
       return 1/4 * a;
     },
     range: sceneRange,
-    color: 'blue',
+    color: '#1e88ab',
     sumaParcial: function () {
       return sumaParcialCuadrado (this.a, this.b, this.ordenAproximacion);
     },
