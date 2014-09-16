@@ -170,7 +170,8 @@ function creaTren () {
     sumaParcial: function () {
       return sumaParcialCuadrado (this.a, this.b, this.ordenAproximacion);
     },
-    width: "3px"
+    width: "3px",
+    style: "-p"
   }
 
   funcionAproximacion = SD.functionGraphMaker(specFuncionAproximacion);
@@ -344,7 +345,8 @@ function creaExponencial () {
     sumaParcial: function () {
       return sumaParcialCuadrado (this.a, this.b, this.ordenAproximacion);
     },
-    width: "3px"
+    width: "3px",
+    style: "-p"
   }
   funcionAproximacion = SD.functionGraphMaker(specFuncionAproximacion);
 
